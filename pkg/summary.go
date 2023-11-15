@@ -1,5 +1,5 @@
 // mypackage/summary.go
-package mypackage
+package pkg
 
 type Summary struct {
 	LineCount        int

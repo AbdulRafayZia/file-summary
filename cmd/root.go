@@ -4,7 +4,7 @@ import (
     "io/ioutil"
     "log"
     "github.com/spf13/cobra"
-    "github.com/spf13/hello/mypackage"
+    "github.com/spf13/hello/pkg"
 )
 var rootCmd = &cobra.Command{
     Use:   "hello",
@@ -30,7 +30,7 @@ var fileCmd = &cobra.Command{
     },
 }
 func processFile(filePath string, routines int) {
-    channal := make(chan mypackage.Summary)
+    channal := make(chan pkg.Summary)
     content, err := ioutil.ReadFile(filePath)
     if err != nil {
         log.Fatal(err)
@@ -40,7 +40,7 @@ func processFile(filePath string, routines int) {
     startIndex := 0
     endIndex := chunk
     for iterations := 0; iterations < routines; iterations++ {
-        go mypackage.Counts(fileData[startIndex:endIndex], channal)
+        go pkg.Counts(fileData[startIndex:endIndex], channal)
         startIndex = endIndex
         endIndex += chunk
     }
